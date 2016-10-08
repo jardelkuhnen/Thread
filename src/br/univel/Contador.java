@@ -17,6 +17,11 @@ public class Contador {
 	public static Contador getInstancia(final Integer contarAte,
 			final Boolean wait, final String name) {
 		if (instancia == null) {
+			try {
+				Thread.currentThread().sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			instancia = new Contador(contarAte, wait, name);
 		}
 		return instancia;
@@ -26,7 +31,6 @@ public class Contador {
 
 		Thread thread = Thread.currentThread();
 		thread.setName(this.name);
-
 		Integer contador = 0;
 
 		while (contador < contarAte) {
